@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <title>Registro de Usuario</title>
+    <meta name="description" content="Formulario de registro de usuarios.">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            margin: 0;
+            color: white;
+        }
+
+        header, footer {
+            text-align: center;
+            padding: 15px;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .form-container {
+            background: white;
+            color: #0f172a;
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4f46e5;
+        }
+
+    
+        .mensaje {
+            background: #22c55e;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Registro de Datos</h1>
+</header>
+
+<main>
+    <section class="form-container">
+
+       
+        <div id="mensaje" class="mensaje oculto">
+             Registro exitoso
+        </div>
+
+        
+        <form onsubmit="return false;" autocomplete="on">
+
+            <h2>Datos personales</h2>
+
+            <div class="campo">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+            </div>
+
+            <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="campo">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" min="1" max="100" required>
+            </div>
+
+            <div class="campo">
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="date" id="fecha" required>
+            </div>
+
+            <div class="campo">
+                <label>
+                    <input type="checkbox" required>
+                    Acepto los términos y condiciones
+                </label>
+            </div>
+
+            <button type="submit">Registrarme</button>
+
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Formulario Web</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector("form");
+    const mensaje = document.getElementById("mensaje");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById("nombre").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const edad = document.getElementById("edad").value;
+        const fecha = document.getElementById("fecha").value;
+
+        if (nombre === "") {
+            alert("Por favor ingresa tu nombre");
+            return;
+        }
+
+        if (correo === "" || !correo.includes("@")) {
+            alert("Ingresa un correo válido");
+            return;
+        }
+
+        if (edad === "" || edad < 1 || edad > 100) {
+            alert("Ingresa una edad válida");
+            return;
+        }
+
+        if (fecha === "") {
+            alert("Selecciona tu fecha de nacimiento");
+            return;
+        }
+
+        
+        mensaje.classList.remove("oculto");
+
+      
+        form.reset();
+
+        
+        setTimeout(() => {
+            mensaje.classList.add("oculto");
+        }, 3000);
+    });
+
+});
+</script>
+
+</body>
+</html>
